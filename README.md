@@ -112,7 +112,10 @@ The app includes:
 
 ## 💡 Author
 Priyal Sarda
+
 Built with ❤️ using LangGraph and Groq
+
+---
 
 ## Deployed Link
 https://essay-writing-aiagent-langgraph.streamlit.app/

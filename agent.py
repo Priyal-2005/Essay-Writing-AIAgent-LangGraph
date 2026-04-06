@@ -21,7 +21,12 @@ from langgraph.graph import StateGraph, END
 
 # 🔐 Load Groq API Key from env file
 load_dotenv()
-os.environ["GROQ_API_KEY"] = os.getenv("GROQ_API_KEY")
+
+api_key = os.getenv("GROQ_API_KEY")
+if not api_key:
+    raise ValueError("GROQ_API_KEY not found in environment variables. Please set it in your .env file.")
+
+os.environ["GROQ_API_KEY"] = api_key
 
 # 🧠 Initialize LLM
 llm = ChatGroq(model="llama-3.3-70b-versatile")

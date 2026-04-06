@@ -19,12 +19,20 @@ from langchain_groq import ChatGroq
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.graph import StateGraph, END
 
-# 🔐 Load Groq API Key from env file
+# 🔐 Load Groq API Key from env file or Streamlit secrets
+import streamlit as st
+
 load_dotenv()
 
+# Try loading from .env (local)
 api_key = os.getenv("GROQ_API_KEY")
+
+# Fallback to Streamlit secrets (deployment)
 if not api_key:
-    raise ValueError("GROQ_API_KEY not found in environment variables. Please set it in your .env file.")
+    try:
+        api_key = st.secrets["GROQ_API_KEY"]
+    except Exception:
+        raise ValueError("GROQ_API_KEY not found in .env or Streamlit secrets")
 
 os.environ["GROQ_API_KEY"] = api_key
 
